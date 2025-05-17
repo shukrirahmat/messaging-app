@@ -1,1 +1,19 @@
+@font-face {
+    font-family: "Staatliches";
+    src: url(/src/assets/fonts/Staatliches-Regular.ttf);
+}
 
+@font-face {
+    font-family: "Ancizar Sans";
+    src: url(/src/assets/fonts/AncizarSans-VariableFont_wght.ttf);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color :gainsboro;
+}
