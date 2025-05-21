@@ -4,8 +4,19 @@
 }
 
 @font-face {
-    font-family: "Ancizar Sans";
-    src: url(/src/assets/fonts/AncizarSans-VariableFont_wght.ttf);
+    font-family: "Rubik";
+    src: url(/src/assets/fonts/Rubik-VariableFont_wght.ttf);
+}
+
+:root {
+  --color0: #f5f5f5;
+  --color1: #dcdcdc;
+  --color2: #c0c0c0;
+  --color3: #2f4f4f;
+  --color4: #228b22;
+  --color5: #00b45f;
+  --color6: #00904c;
+
 }
 
 * {
@@ -15,5 +26,5 @@
 }
 
 body {
-  background-color :gainsboro;
+  background-color: var(--color1);
 }
