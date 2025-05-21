@@ -13,7 +13,12 @@
     text-align: center;
     padding: 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.6);
-    color: var(--color3)
+    color: var(--color3);
+}
+
+.header a {
+    text-decoration: none;
+    color: var(--color3);
 }
 
 .footer {

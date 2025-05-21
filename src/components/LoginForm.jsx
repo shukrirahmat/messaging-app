@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "../styles/LoginForm.module.css";
 
 const LoginForm = () => {
@@ -32,8 +33,8 @@ const LoginForm = () => {
           value={password}
           onChange={editPassword}
         />
-        <button className={styles.loginBtn}>LOG-IN</button>
-        <p className={styles.signUpText}>Don't have an account? <a href="/">Sign up</a></p>
+        <button className={styles.loginBtn}>LOG IN</button>
+        <p className={styles.signUpText}>Don't have an account? <Link to="/sign-up">Sign up</Link></p>
       </form>
     </div>
   );

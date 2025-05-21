@@ -1,0 +1,8 @@
+.base p {
+    font-family: "Rubik", sans-serif;
+    padding: 20px;
+}
+
+.a {
+    color: var(--color6);
+}
