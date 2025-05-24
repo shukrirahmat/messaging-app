@@ -7,7 +7,7 @@
 }
 
 .form {
-    background-color: var(--color0);
+    background-color: var(--almostwhite);
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -15,22 +15,23 @@
     width: 500px;
     font-family: "Rubik", sans-serif;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
 }
 
 .form input {
     font-family: "Rubik", sans-serif;
-    font-size: 18px;
-    padding: 4px 8px;
+    font-size: 16px;
+    padding: 10px 10px;
     width: 100%;
-    border: solid 1px var(--color3);
+    border: solid 1px var(--blackgreen);
 }
 
 .form input:hover {
-    background-color: var(--color1);
+    background-color: var(--smoky);
 }
 
 .form input:focus {
-    outline: solid 2px var(--color5);
+    outline: solid 2px var(--green);
     background-color: white;
 }
 
@@ -51,18 +52,30 @@
     font-size: 22px;
     padding: 4px 8px;
     border: none;
-    background-color: var(--color5);
-    color: var(--color0);
+    background-color: var(--green);
+    color: var(--almostwhite);
 }
 
 .signUpBtn:hover {
-    background-color: var(--color6);
+    background-color: var(--darkergreen);
+}
+
+.signUpBtn:disabled {
+    background-color: var(--fadedgreen);
 }
 
 .errorMsg {
-    color: var(--color3);
+    color: var(--blackgreen);
     position: absolute;
     font-size: 13px;
-    bottom: -20px;
+    bottom: -18px;
     padding-left: 10px;
+}
+
+.signUpErr {
+    color: var(--blackgreen);
+    position: absolute;
+    font-size: 13px;
+    bottom: 10px;
+    align-self: center;
 }

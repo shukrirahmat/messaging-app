@@ -7,7 +7,7 @@
 }
 
 .form {
-    background-color: var(--color0);
+    background-color: var(--almostwhite);
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -19,17 +19,17 @@
 
 .form input {
     font-family: "Rubik", sans-serif;
-    font-size: 18px;
-    padding: 4px 8px;
-    border: solid 1px var(--color3);
+    font-size: 16px;
+    padding: 10px 10px;
+    border: solid 1px var(--blackgreen);
 }
 
 .form input:hover {
-    background-color: var(--color1);
+    background-color: var(--smoky);
 }
 
 .form input:focus {
-    outline: solid 2px var(--color5);
+    outline: solid 2px var(--green);
     background-color: white;
 }
 
@@ -38,12 +38,12 @@
     font-size: 22px;
     padding: 4px 8px;
     border: none;
-    background-color: var(--color5);
-    color: var(--color0);
+    background-color: var(--green);
+    color: var(--almostwhite);
 }
 
 .loginBtn:hover {
-    background-color: var(--color6);
+    background-color: var(--darkergreen);
 }
 
 .signUpText {
@@ -51,5 +51,5 @@
 }
 
 .signUpText a {
-    color: var(--color6);
+    color: var(--darkergreen);
 }
