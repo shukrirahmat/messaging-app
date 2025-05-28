@@ -33,6 +33,11 @@
     background-color: white;
 }
 
+.buttonDiv {
+    margin-bottom: 10px;
+    position: relative;
+}
+
 .loginBtn {
     font-family: "Staatliches", sans-serif;
     font-size: 22px;
@@ -40,10 +45,24 @@
     border: none;
     background-color: var(--green);
     color: var(--almostwhite);
+    width: 100%;
 }
 
 .loginBtn:hover {
     background-color: var(--darkergreen);
+}
+
+.loginBtn:disabled {
+    background-color: var(--fadedgreen);
+}
+
+.logInErr {
+    color: var(--blackgreen);
+    position: absolute;
+    font-size: 13px;
+    bottom: -18px;
+    text-align: center;
+    width: 100%;
 }
 
 .signUpText {
