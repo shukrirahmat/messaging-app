@@ -36,11 +36,14 @@ const signUpForm = () => {
     setPassword(newpassword);
     if (password2.length > 0 && newpassword !== password2) {
       setPasswordErr2("*Password did not match");
-    } else if (newpassword.length > 0 && newpassword.length < 6) {
+    } else {
+      setPasswordErr2("")
+    }
+    
+    if (newpassword.length > 0 && newpassword.length < 6) {
       setPasswordErr("*Password should have 6 characters minimum");
     } else {
       setPasswordErr("");
-      setPasswordErr2("");
     }
   };
 
