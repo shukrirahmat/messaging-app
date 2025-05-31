@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import styles from "../styles/SignUpForm.module.css";
 import fetchURL from "../fetchURL.js";
 
 const signUpForm = () => {
   const navigate = useNavigate();
+  const { isLoggedIn} = useOutletContext();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -109,6 +110,10 @@ const signUpForm = () => {
         });
     }
   };
+
+  if (isLoggedIn) {
+    return <Navigate to="/"/>;
+  }
 
   return (
     <div className={styles.base}>

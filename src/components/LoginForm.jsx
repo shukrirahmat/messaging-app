@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link, replace } from "react-router-dom";
+import { Link, Navigate, useOutletContext } from "react-router-dom";
 import styles from "../styles/LoginForm.module.css";
 import fetchURL from "../fetchURL.js";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
 
+  const { isLoggedIn} = useOutletContext();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -51,10 +52,9 @@ const LoginForm = () => {
             setIsLogging(false);
             setLogInErr(data.message)
           } else {
-            setIsLogging(false);
             window.localStorage.setItem("token", data.token);
-            navigate("/");
             navigate(0);
+            
           }
         })
         .catch((err) => {
@@ -63,6 +63,10 @@ const LoginForm = () => {
         });
     }
   };
+
+  if (isLoggedIn) {
+    return <Navigate to="/"/>;
+  }
 
   return (
     <div className={styles.base}>
