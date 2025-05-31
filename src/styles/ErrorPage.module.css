@@ -3,6 +3,6 @@
     padding: 20px;
 }
 
-.a {
-    color: var(--color6);
+.base a {
+    color: var(--darkergreen);
 }

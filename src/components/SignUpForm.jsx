@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { Link, Navigate, useNavigate, useOutletContext } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  useNavigate,
+  useOutletContext,
+} from "react-router-dom";
 import styles from "../styles/SignUpForm.module.css";
 import fetchURL from "../fetchURL.js";
+import SignUpSuccess from "./SignUpSuccess.jsx";
 
 const signUpForm = () => {
   const navigate = useNavigate();
-  const { isLoggedIn} = useOutletContext();
+  const { isLoggedIn } = useOutletContext();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +21,7 @@ const signUpForm = () => {
   const [passwordErr2, setPasswordErr2] = useState(null);
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [signUpErr, setSignUpErr] = useState("");
+  const [atSuccessPage, setAtSuccessPage] = useState(false);
 
   const isFirstCharALetter = (string) => {
     return isNaN(string.charAt(0)) && string.charAt(0) !== "_";
@@ -38,9 +45,9 @@ const signUpForm = () => {
     if (password2.length > 0 && newpassword !== password2) {
       setPasswordErr2("*Password did not match");
     } else {
-      setPasswordErr2("")
+      setPasswordErr2("");
     }
-    
+
     if (newpassword.length > 0 && newpassword.length < 6) {
       setPasswordErr("*Password should have 6 characters minimum");
     } else {
@@ -56,6 +63,35 @@ const signUpForm = () => {
     } else {
       setPasswordErr2("");
     }
+  };
+
+  const autoLogin = (username, password) => {
+    fetch(fetchURL + "/user/log-in", {
+      mode: "cors",
+      method: "POST",
+      headers: { "Content-type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        username,
+        password,
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Sign up successful. Try login manually");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (!data.success) {
+          setAtSuccessPage(true);
+        } else {
+          window.localStorage.setItem("token", data.token);
+          navigate(0);
+        }
+      })
+      .catch((err) => {
+        setAtSuccessPage(true);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -96,12 +132,11 @@ const signUpForm = () => {
           else throw new Error("Failed to sign up. server error");
         })
         .then((data) => {
-          setIsSigningUp(false);
           if (!data.success) {
+            setIsSigningUp(false);
             setUsernameErr(data.message);
           } else {
-            navigate("/");
-            // Change this to automatically log in later!
+            autoLogin(username, password);
           }
         })
         .catch((err) => {
@@ -112,7 +147,11 @@ const signUpForm = () => {
   };
 
   if (isLoggedIn) {
-    return <Navigate to="/"/>;
+    return <Navigate to="/" />;
+  }
+
+  if (atSuccessPage) {
+    return <SignUpSuccess />;
   }
 
   return (
