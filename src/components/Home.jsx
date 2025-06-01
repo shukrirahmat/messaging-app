@@ -1,12 +1,42 @@
-import { useOutletContext, Navigate, useNavigate} from "react-router-dom";
+import { useOutletContext, Navigate, useNavigate } from "react-router-dom";
+import fetchURL from "../fetchURL.js";
 
 const Home = () => {
   const navigate = useNavigate();
   const { isLoggedIn, user } = useOutletContext();
 
   const handleLogOut = () => {
-    window.localStorage.removeItem("token");
-    navigate(0);
+    const token = window.localStorage.getItem("token");
+
+    if (!token) {
+      navigate(0);
+    } else {
+      fetch(fetchURL + "/user/log-out", {
+        mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+        body: new URLSearchParams({
+          username: user.username,
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Failed to log off properly");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          window.localStorage.removeItem("token");
+          navigate(0);
+        })
+        .catch((err) => {
+          window.localStorage.removeItem("token");
+          navigate(0);
+        });
+    }
   };
 
   if (!isLoggedIn) {
