@@ -1,5 +1,6 @@
 import { useOutletContext, Navigate, useNavigate } from "react-router-dom";
 import fetchURL from "../fetchURL.js";
+import UserList from "./UserList.jsx";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const Home = () => {
       <h1>THIS IS HOME PAGE</h1>
       <p>Logged in as {user.username}</p>
       <button onClick={handleLogOut}>LOG OUT</button>
+      <UserList currentUser={user}/>
     </div>
   );
 };
