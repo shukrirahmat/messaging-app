@@ -1,10 +1,18 @@
 import { useOutletContext, Navigate, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import fetchURL from "../fetchURL.js";
 import UserList from "./UserList.jsx";
+import MessagePanel from "./MessagePanel.jsx";
 
 const Home = () => {
   const navigate = useNavigate();
   const { isLoggedIn, user } = useOutletContext();
+  const [isMessaging, setIsMessaging] = useState(null);
+
+  const handleMessaging = (username) => {
+    setIsMessaging(username);
+  }
+
 
   const handleLogOut = () => {
     const token = window.localStorage.getItem("token");
@@ -47,9 +55,14 @@ const Home = () => {
   return (
     <div>
       <h1>THIS IS HOME PAGE</h1>
+      <div>
       <p>Logged in as {user.username}</p>
       <button onClick={handleLogOut}>LOG OUT</button>
-      <UserList currentUser={user}/>
+      <UserList currentUser={user} handleMessaging={handleMessaging}/>
+      </div>
+      <div>
+        {isMessaging && <MessagePanel receiver={isMessaging}/>}
+      </div>
     </div>
   );
 };

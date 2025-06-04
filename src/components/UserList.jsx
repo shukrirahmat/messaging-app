@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import fetchURL from "../fetchURL.js";
 import { differenceInMinutes } from "date-fns";
+import PropTypes from "prop-types";
 
-const UserList = () => {
+const UserList = ({handleMessaging}) => {
   const [isLoadingUser, setIsLoadingUser] = useState(true);
   const [userList, setUserList] = useState([]);
   const [fetchError, setFetchError] = useState(null);
 
-  const OFFLINE_TIME_OFF = 3
+  const OFFLINE_TIME_OFF = 30
 
   useEffect(() => {
     setIsLoadingUser(true);
@@ -61,10 +62,17 @@ const UserList = () => {
         return (<div key={user.username}>
             <p>{user.username}</p>
             <p>status: {!user.isLoggedIn || idleTime > OFFLINE_TIME_OFF ? "Offline" : "Online"}</p>
+            <button onClick={() => {
+              handleMessaging(user.username)
+            }}>SEND MESSAGE</button>
         </div>)
       })}
     </div>
   );
 };
+
+UserList.propTypes = {
+    handleMessaging: PropTypes.func
+}
 
 export default UserList;
