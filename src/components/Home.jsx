@@ -3,6 +3,7 @@ import { useState } from "react";
 import fetchURL from "../fetchURL.js";
 import UserList from "./UserList.jsx";
 import MessagePanel from "./MessagePanel.jsx";
+import styles from "../styles/Home.module.css";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -11,8 +12,7 @@ const Home = () => {
 
   const handleMessaging = (username) => {
     setIsMessaging(username);
-  }
-
+  };
 
   const handleLogOut = () => {
     const token = window.localStorage.getItem("token");
@@ -53,15 +53,20 @@ const Home = () => {
   }
 
   return (
-    <div>
-      <h1>THIS IS HOME PAGE</h1>
-      <div>
-      <p>Logged in as {user.username}</p>
-      <button onClick={handleLogOut}>LOG OUT</button>
-      <UserList currentUser={user} handleMessaging={handleMessaging}/>
+    <div className={styles.base}>
+      <div className={styles.leftPanel}>
+        <div className={styles.userActions}>
+          <div className={styles.userName}>{user.username}</div>
+          <nav className={styles.userNavs}>
+          <button >Profile</button>
+          <button >Inbox</button>
+          <button onClick={handleLogOut}>Logout</button>
+          </nav>
+        </div>
+        <UserList currentUser={user} handleMessaging={handleMessaging} />
       </div>
-      <div>
-        {isMessaging && <MessagePanel receiver={isMessaging}/>}
+      <div className={styles.mainContent}>
+        {isMessaging && <MessagePanel receiver={isMessaging} />}
       </div>
     </div>
   );

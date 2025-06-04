@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import fetchURL from "../fetchURL.js";
 import { differenceInMinutes } from "date-fns";
 import PropTypes from "prop-types";
+import styles from "../styles/UserList.module.css";
 
 const UserList = ({handleMessaging}) => {
   const [isLoadingUser, setIsLoadingUser] = useState(true);
@@ -47,7 +48,7 @@ const UserList = ({handleMessaging}) => {
   }
 
   return (
-    <div>
+    <div className={styles.base}>
       {userList.sort((user1, user2) => {
         let status1, status2;
         if (!user1.isLoggedIn || differenceInMinutes(new Date(), user1.lastVerified) > OFFLINE_TIME_OFF) {
@@ -59,7 +60,7 @@ const UserList = ({handleMessaging}) => {
         return status1 - status2;
       }).map((user) => {
         const idleTime = differenceInMinutes(new Date(), user.lastVerified);
-        return (<div key={user.username}>
+        return (<div key={user.username} className={styles.user}>
             <p>{user.username}</p>
             <p>status: {!user.isLoggedIn || idleTime > OFFLINE_TIME_OFF ? "Offline" : "Online"}</p>
             <button onClick={() => {

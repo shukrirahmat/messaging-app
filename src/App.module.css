@@ -9,9 +9,9 @@
 .header {
     font-family: "Staatliches", sans-serif;
     font-weight: normal;
-    font-size: 60px;
+    font-size: 30px;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.6);
     color: var(--blackgreen);
 }
