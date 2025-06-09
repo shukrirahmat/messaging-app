@@ -1,7 +1,28 @@
 .base {
+    width: 20%;
+    height: calc(100vh - 75px);
     display: flex;
     flex-direction: column;
-    background-color: var(--almostwhite);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     overflow-y: scroll;
+    border-right: 1px solid var(--darkersmoky);   
+    background-color: var(--almostwhite);
+    padding: 0px 15px;
+}
+
+.message {
+    font-family: "Rubik", sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    margin: auto;
+    color: var(--blackgreen);
+
+}
+
+.base > h2 {
+    font-family: "Rubik", sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    color: var(--blackgreen);
+    border-bottom: 1px solid var(--darkersmoky); 
+    padding: 10px 0;
 }

@@ -1,38 +1,70 @@
 .base {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0px 50px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .header {
-    font-family: "Staatliches", sans-serif;
-    font-weight: normal;
-    font-size: 30px;
-    text-align: center;
-    padding: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
-    color: var(--blackgreen);
+  font-family: "Staatliches", sans-serif;
+  font-weight: normal;
+  font-size: 30px;
+  text-align: center;
+  border-bottom: 1px solid var(--darkersmoky);
+  color: var(--blackgreen);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 50px;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+.headerButtons {
+  width: 25%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.headerButtons button {
+  border: 1px solid var(--blackgreen);
+  padding: 5px 10px;
+  color: var(--blackgreen);
+  font-family: "Rubik", sans-serif;
+  background-color: var(--smoky);
+  font-weight: 600;
+}
+
+.headerButtons button:hover {
+  background-color: var(--blackgreen);
+  color: var(--smoky);
+  cursor: pointer;
 }
 
 .header a {
-    text-decoration: none;
-    color: var(--blackgreen);
+  text-decoration: none;
+  color: var(--blackgreen);
 }
 
 .footer {
-    padding: 5px;
-    text-align: center;
-    font-family: "Rubik", sans-serif;
-    border-top: 1px solid rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  text-align: center;
+  font-family: "Rubik", sans-serif;
+  border-top: 1px solid var(--darkersmoky);
+  font-size: 14px;
 }
 
 .loadingMessage {
-    flex: 1;
-    font-family: "Rubik", sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  flex: 1;
+  font-family: "Rubik", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

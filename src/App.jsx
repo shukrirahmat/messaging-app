@@ -1,14 +1,49 @@
 import styles from "./App.module.css";
-import { Outlet, Link} from "react-router-dom";
+import { Outlet, Link , useNavigate} from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import fetchURL from "./fetchURL.js";
 
 function App() {
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(null);
+
+  const handleLogOut = () => {
+    const token = window.localStorage.getItem("token");
+
+    if (!token) {
+      navigate(0);
+    } else {
+      fetch(fetchURL + "/user/log-out", {
+        mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+        body: new URLSearchParams({
+          username: user.username,
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Failed to log off properly");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          window.localStorage.removeItem("token");
+          navigate(0);
+        })
+        .catch((err) => {
+          window.localStorage.removeItem("token");
+          navigate(0);
+        });
+    }
+  };
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -34,7 +69,7 @@ function App() {
         })
         .catch((err) => {
           window.localStorage.removeItem("token");
-          setIsLoggedIn(false)
+          setIsLoggedIn(false);
           setIsLoading(false);
         });
     }
@@ -43,9 +78,17 @@ function App() {
   return (
     <div className={styles.base}>
       <h1 className={styles.header}>
+        <div className={styles.headerButtons}></div>
         <Link to="/">ODIN TEXT</Link>
+        <div className={styles.headerButtons}>
+          {isLoggedIn && <button onClick={handleLogOut}>LOG OUT</button>}
+        </div>
       </h1>
-      {isLoading? (<p className={styles.loadingMessage}>Loading...</p>) : <Outlet context={{isLoggedIn, user}}/>}
+      {isLoading ? (
+        <p className={styles.loadingMessage}>Loading...</p>
+      ) : (
+        <Outlet context={{ isLoggedIn, user }} />
+      )}
       <p className={styles.footer}>© shkrrhmt 2025</p>
     </div>
   );

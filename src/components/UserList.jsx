@@ -4,12 +4,12 @@ import { differenceInMinutes } from "date-fns";
 import PropTypes from "prop-types";
 import styles from "../styles/UserList.module.css";
 
-const UserList = ({handleMessaging}) => {
+const UserList = ({ handleMessaging }) => {
   const [isLoadingUser, setIsLoadingUser] = useState(true);
   const [userList, setUserList] = useState([]);
   const [fetchError, setFetchError] = useState(null);
 
-  const OFFLINE_TIME_OFF = 30
+  const OFFLINE_TIME_OFF = 30;
 
   useEffect(() => {
     setIsLoadingUser(true);
@@ -36,44 +36,80 @@ const UserList = ({handleMessaging}) => {
   }, []);
 
   if (fetchError) {
-    return <p>{fetchError}</p>;
+    return <div className={styles.base}><p className={styles.message}>{fetchError}</p></div>;
   }
 
   if (isLoadingUser) {
-    return <p>Loading users...</p>;
+    return (
+      <div className={styles.base}>
+        <p className={styles.message}>Loading users...</p>
+      </div>
+    );
   }
 
   if (userList.length < 1) {
-    return <p>No users found</p>;
+    return (
+      <div className={styles.base}>
+        <p className={styles.message}>No users found</p>
+      </div>
+    );
   }
 
   return (
     <div className={styles.base}>
-      {userList.sort((user1, user2) => {
-        let status1, status2;
-        if (!user1.isLoggedIn || differenceInMinutes(new Date(), user1.lastVerified) > OFFLINE_TIME_OFF) {
-            status1 = 1;
-        } else {status1 = 0}
-        if (!user2.isLoggedIn || differenceInMinutes(new Date(), user2.lastVerified) > OFFLINE_TIME_OFF) {
-            status2 = 1;
-        } else {status2 = 0}
-        return status1 - status2;
-      }).map((user) => {
-        const idleTime = differenceInMinutes(new Date(), user.lastVerified);
-        return (<div key={user.username} className={styles.user}>
-            <p>{user.username}</p>
-            <p>status: {!user.isLoggedIn || idleTime > OFFLINE_TIME_OFF ? "Offline" : "Online"}</p>
-            <button onClick={() => {
-              handleMessaging(user.username)
-            }}>SEND MESSAGE</button>
-        </div>)
-      })}
+      <h2>USERS</h2>
+      <div className={styles.list}>
+        {userList
+          .sort((user1, user2) => {
+            let status1, status2;
+            if (
+              !user1.isLoggedIn ||
+              differenceInMinutes(new Date(), user1.lastVerified) >
+                OFFLINE_TIME_OFF
+            ) {
+              status1 = 1;
+            } else {
+              status1 = 0;
+            }
+            if (
+              !user2.isLoggedIn ||
+              differenceInMinutes(new Date(), user2.lastVerified) >
+                OFFLINE_TIME_OFF
+            ) {
+              status2 = 1;
+            } else {
+              status2 = 0;
+            }
+            return status1 - status2;
+          })
+          .map((user) => {
+            const idleTime = differenceInMinutes(new Date(), user.lastVerified);
+            return (
+              <div key={user.username} className={styles.user}>
+                <p>{user.username}</p>
+                <p>
+                  status:{" "}
+                  {!user.isLoggedIn || idleTime > OFFLINE_TIME_OFF
+                    ? "Offline"
+                    : "Online"}
+                </p>
+                <button
+                  onClick={() => {
+                    handleMessaging(user.username);
+                  }}
+                >
+                  SEND MESSAGE
+                </button>
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 };
 
 UserList.propTypes = {
-    handleMessaging: PropTypes.func
-}
+  handleMessaging: PropTypes.func,
+};
 
 export default UserList;

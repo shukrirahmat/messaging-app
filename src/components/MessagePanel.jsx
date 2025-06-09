@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchURL from "../fetchURL.js";
 import PropTypes from "prop-types";
+import { format } from "date-fns";
+import styles from "../styles/MessagePanel.module.css";
 
-const MessagePanel = ({ receiver }) => {
+const MessagePanel = ({ sender, receiver }) => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [sendError, setSendError] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [isLoadingMessage, setIsLoadingMessage] = useState(true);
+  const [LoadingMessageErr, setLoadingMessageErr] = useState(false);
+  const [messageList, setMessageList] = useState([]);
 
   const editMessage = (e) => {
     const newMessage = e.target.value;
@@ -61,8 +66,65 @@ const MessagePanel = ({ receiver }) => {
     }
   };
 
+  useEffect(() => {
+    setIsLoadingMessage(true);
+    setLoadingMessageErr("");
+    const token = window.localStorage.getItem("token");
+
+    if (!token) {
+      navigate(0);
+    } else {
+      fetch(fetchURL + "/message/chat", {
+        mode: "cors",
+        method: "post",
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+        body: new URLSearchParams({
+          user: receiver,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) return response.json();
+          else if (response.status === 401)
+            throw new Error("Verification fail");
+          else throw new Error("Failed to fetch messages");
+        })
+        .then((data) => {
+          setMessageList(data);
+          setIsLoadingMessage(false);
+        })
+        .catch((err) => {
+          if (err.message === "Verification fail") {
+            navigate(0);
+          } else {
+            setLoadingMessageErr(err.message);
+            setIsLoadingMessage(false);
+          }
+        });
+    }
+  }, []);
+
   return (
     <div>
+      <div className={styles.chatContainer}>
+        {isLoadingMessage ? (
+          <p>Loading messages...</p>
+        ) : LoadingMessageErr ? (
+          <p>{LoadingMessageErr}</p>
+        ) : (
+          <div className={styles.chatList}>
+            {messageList.map((msg) => {
+              return (<div className={styles.chatMessage} key={msg.id}>
+                <p>{msg.senderName}</p>
+                <p>{msg.content}</p>
+                <p>{format(msg.dateSend, "Pp")}</p>
+              </div>)
+            })}
+          </div>
+        )}
+      </div>
       <form onSubmit={sendMessage}>
         <textarea
           name="message"
