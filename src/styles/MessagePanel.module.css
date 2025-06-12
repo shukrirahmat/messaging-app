@@ -1,0 +1,108 @@
+.base {
+  height: calc(100vh - 75px);
+  background-color: blueviolet;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatContainer {
+  flex: 1;
+  overflow-y: scroll;
+  background-color: var(--darkersmoky);
+  padding: 20px;
+  font-family: "Rubik", sans-serif;
+}
+
+.chatList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.chatMsg {
+  background-color: var(--almostwhite);
+  max-width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 350;
+  position: relative;
+}
+
+.leftMsg {
+  align-self: flex-start;
+  border-radius: 10px 10px 10px 0;
+}
+
+.rightMsg {
+  align-self: flex-end;
+  border-radius: 10px 10px 0 10px;
+}
+
+.leftMsg:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 10px solid var(--almostwhite);
+  border-right: 10px solid transparent;
+  bottom: -9px;
+  left: 0px;
+}
+
+.rightMsg:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 10px solid var(--almostwhite);
+  border-left: 10px solid transparent;
+  bottom: -9px;
+  right: 0px;
+}
+
+.base form {
+  min-height: 60px;
+  background-color: var(--almostwhite);
+  display: flex;
+  flex-direction: row;
+  padding: 10px 20px;
+  gap: 10px;
+}
+
+.base form button {
+  font-family: "Staatliches", sans-serif;
+  font-size: 20px;
+  padding: 4px 8px;
+  border: none;
+  background-color: var(--green);
+  color: var(--almostwhite);
+  min-width: 80px;
+}
+
+.base form button:hover {
+  background-color: var(--darkergreen);
+}
+
+.base form button:disabled {
+  background-color: var(--fadedgreen);
+  cursor: wait;
+}
+
+.base textarea {
+  height: auto;
+  flex: 1;
+  resize: none;
+  padding: 5px;
+  border: solid 1px var(--blackgreen);
+  font-family: "Rubik", sans-serif;
+}
+
+.base textarea:hover {
+  background-color: var(--smoky);
+}
+
+.base textarea:focus {
+  outline: solid 2px var(--green);
+  background-color: white;
+}

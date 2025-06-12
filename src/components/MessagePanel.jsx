@@ -109,7 +109,7 @@ const MessagePanel = ({ sender, receiver }) => {
   }, [receiver, refresh]);
 
   return (
-    <div>
+    <div className={styles.base}>
       <div className={styles.chatContainer}>
         {isLoadingMessage ? (
           <p>Loading messages...</p>
@@ -118,8 +118,16 @@ const MessagePanel = ({ sender, receiver }) => {
         ) : (
           <div className={styles.chatList}>
             {messageList.map((msg) => {
-              return (<div className={styles.chatMessage} key={msg.id}>
-                <p>{msg.senderName}</p>
+              let css = `${styles.chatMsg} ${styles.leftMsg}`
+              let name = msg.senderName
+
+              if (msg.senderName === sender) {
+                css = `${styles.chatMsg} ${styles.rightMsg}`
+                name = "You"
+              }
+
+              return (<div className={css} key={msg.id}>
+                <p>{name}</p>
                 <p>{msg.content}</p>
                 <p>{format(msg.dateSend, "Pp")}</p>
               </div>)
