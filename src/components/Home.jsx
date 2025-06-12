@@ -1,4 +1,4 @@
-import { useOutletContext, Navigate, useNavigate } from "react-router-dom";
+import { useOutletContext, Navigate} from "react-router-dom";
 import { useState } from "react";
 import UserList from "./UserList.jsx";
 import MessagePanel from "./MessagePanel.jsx";
@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 
 const Home = () => {
   const { isLoggedIn, user } = useOutletContext();
-  const [isMessaging, setIsMessaging] = useState(null);
+  const [isMessaging, setIsMessaging] = useState("");
 
   const handleMessaging = (username) => {
     setIsMessaging(username);

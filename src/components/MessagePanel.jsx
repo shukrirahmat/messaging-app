@@ -13,6 +13,7 @@ const MessagePanel = ({ sender, receiver }) => {
   const [isLoadingMessage, setIsLoadingMessage] = useState(true);
   const [LoadingMessageErr, setLoadingMessageErr] = useState(false);
   const [messageList, setMessageList] = useState([]);
+  const [refresh, setRefresh] = useState(0);
 
   const editMessage = (e) => {
     const newMessage = e.target.value;
@@ -54,6 +55,7 @@ const MessagePanel = ({ sender, receiver }) => {
           setMessage("");
           setSendError("");
           setIsSending(false);
+          setRefresh(refresh + 1)
         })
         .catch((err) => {
           if (err.message === "Unverified") {
@@ -104,7 +106,7 @@ const MessagePanel = ({ sender, receiver }) => {
           }
         });
     }
-  }, []);
+  }, [receiver, refresh]);
 
   return (
     <div>
