@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchURL from "../fetchURL.js";
 import PropTypes from "prop-types";
-import { format } from "date-fns";
+import { format, isSameDay } from "date-fns";
 import styles from "../styles/MessagePanel.module.css";
 
 const MessagePanel = ({ sender, receiver }) => {
@@ -55,7 +55,7 @@ const MessagePanel = ({ sender, receiver }) => {
           setMessage("");
           setSendError("");
           setIsSending(false);
-          setRefresh(refresh + 1)
+          setRefresh(refresh + 1);
         })
         .catch((err) => {
           if (err.message === "Unverified") {
@@ -115,22 +115,39 @@ const MessagePanel = ({ sender, receiver }) => {
           <p>Loading messages...</p>
         ) : LoadingMessageErr ? (
           <p>{LoadingMessageErr}</p>
+        ) : messageList.length < 1 ? (
+          <p>No messages yet. Say "Hello!" to {receiver}</p>
         ) : (
           <div className={styles.chatList}>
-            {messageList.map((msg) => {
-              let css = `${styles.chatMsg} ${styles.leftMsg}`
-              let name = msg.senderName
+            {messageList.map((msg, index) => {
+              let css = `${styles.chatMsg} ${styles.leftMsg}`;
+              let name = msg.senderName;
 
               if (msg.senderName === sender) {
-                css = `${styles.chatMsg} ${styles.rightMsg}`
-                name = "You"
+                css = `${styles.chatMsg} ${styles.rightMsg}`;
+                name = "You";
               }
 
-              return (<div className={css} key={msg.id}>
-                <p>{name}</p>
-                <p>{msg.content}</p>
-                <p>{format(msg.dateSend, "Pp")}</p>
-              </div>)
+              return (
+                <>
+                  {(index == 0 ||
+                    !isSameDay(
+                      msg.dateSend,
+                      messageList[index - 1].dateSend
+                    )) && (
+                    <p className={styles.dateGap}>
+                      {format(msg.dateSend, "P")}
+                    </p>
+                  )}
+                  <div className={css} key={msg.id}>
+                    <p className={styles.chatName}>{name}</p>
+                    <p className={styles.chatBody}>{msg.content}</p>
+                    <p className={styles.chatDate}>
+                      {format(msg.dateSend, "p")}
+                    </p>
+                  </div>
+                </>
+              );
             })}
           </div>
         )}
@@ -138,7 +155,7 @@ const MessagePanel = ({ sender, receiver }) => {
       <form onSubmit={sendMessage}>
         <textarea
           name="message"
-          placeholder="Write your message"
+          placeholder={`Write your message to @${receiver}`}
           value={message}
           onChange={editMessage}
         />

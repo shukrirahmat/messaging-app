@@ -1,6 +1,5 @@
 .base {
   height: calc(100vh - 75px);
-  background-color: blueviolet;
   display: flex;
   flex-direction: column;
 }
@@ -13,10 +12,29 @@
   font-family: "Rubik", sans-serif;
 }
 
+.chatContainer > p {
+  font-weight: 350;
+}
+
 .chatList {
   display: flex;
   flex-direction: column;
   gap: 30px;
+}
+
+.dateGap {
+  font-size: 14px;
+  font-weight: 300;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 10px;
+}
+
+.dateGap::before,
+.dateGap::after {
+  content: "";
+  border-top: 0.1rem double rgba(0, 0, 0, 0.6);
+  align-self: center;
 }
 
 .chatMsg {
@@ -27,6 +45,8 @@
   font-family: "Rubik", sans-serif;
   font-weight: 350;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .leftMsg {
@@ -61,6 +81,24 @@
   right: 0px;
 }
 
+.chatName {
+  font-size: 14px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  color: var(--blackgreen);
+}
+
+.chatBody {
+  padding: 10px 10px;
+}
+
+.chatDate {
+  align-self: flex-end;
+  font-size: 12px;
+  font-family: "Rubik", sans-serif;
+  color: var(--blackgreen);
+}
+
 .base form {
   min-height: 60px;
   background-color: var(--almostwhite);
@@ -68,6 +106,8 @@
   flex-direction: row;
   padding: 10px 20px;
   gap: 10px;
+  box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 2;
 }
 
 .base form button {
@@ -96,6 +136,7 @@
   padding: 5px;
   border: solid 1px var(--blackgreen);
   font-family: "Rubik", sans-serif;
+  font-size: 16px;
 }
 
 .base textarea:hover {

@@ -84,16 +84,16 @@ const UserList = ({ handleMessaging }) => {
           })
           .map((user) => {
             const idleTime = differenceInMinutes(new Date(), user.lastVerified);
+            const isOnline = !user.isLoggedIn || idleTime > OFFLINE_TIME_OFF ? false : true;
             return (
               <div key={user.username} className={styles.user}>
-                <p>{user.username}</p>
-                <p>
-                  status:{" "}
-                  {!user.isLoggedIn || idleTime > OFFLINE_TIME_OFF
-                    ? "Offline"
-                    : "Online"}
+                <p className={styles.userName}>{user.username}</p>
+                <p className={isOnline? styles.userOnline : styles.userOffline}>
+                  {isOnline
+                    ? "ONLINE"
+                    : "OFFLINE"}
                 </p>
-                <button
+                <button className={styles.userBtn}
                   onClick={() => {
                     handleMessaging(user.username);
                   }}
