@@ -1,5 +1,5 @@
 import styles from "./App.module.css";
-import { Outlet, Link , useNavigate} from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import fetchURL from "./fetchURL.js";
@@ -10,6 +10,18 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(null);
+  const [isMessaging, setIsMessaging] = useState(null);
+  const [isCheckingProfile, setIsCheckingProfile] = useState(null);
+
+  const handleMessaging = (username) => {
+    setIsMessaging(username);
+    setIsCheckingProfile(null);
+  };
+
+  const handleCheckingProfile = (username) => {
+    setIsCheckingProfile(username);
+    setIsMessaging(null);
+  };
 
   const handleLogOut = () => {
     const token = window.localStorage.getItem("token");
@@ -43,6 +55,11 @@ function App() {
           navigate(0);
         });
     }
+  };
+
+  const goToProfile = () => {
+    setIsMessaging(null);
+    setIsCheckingProfile(null);
   };
 
   useEffect(() => {
@@ -81,14 +98,23 @@ function App() {
         <div className={styles.headerButtons}></div>
         <Link to="/">ODIN TEXT</Link>
         <div className={styles.headerButtons}>
-            {isLoggedIn && <button >PROFILE</button>}
-            {isLoggedIn && <button onClick={handleLogOut}>LOG OUT</button>}        
+          {isLoggedIn && <button onClick={goToProfile}>PROFILE</button>}
+          {isLoggedIn && <button onClick={handleLogOut}>LOG OUT</button>}
         </div>
       </h1>
       {isLoading ? (
         <p className={styles.loadingMessage}>Loading...</p>
       ) : (
-        <Outlet context={{ isLoggedIn, user }} />
+        <Outlet
+          context={{
+            isLoggedIn,
+            user,
+            isMessaging,
+            isCheckingProfile,
+            handleMessaging,
+            handleCheckingProfile,
+          }}
+        />
       )}
       <p className={styles.footer}>© shkrrhmt 2025</p>
     </div>

@@ -4,7 +4,7 @@ import { differenceInMinutes } from "date-fns";
 import PropTypes from "prop-types";
 import styles from "../styles/UserList.module.css";
 
-const UserList = ({ handleMessaging }) => {
+const UserList = ({ handleMessaging, handleCheckingProfile }) => {
   const [isLoadingUser, setIsLoadingUser] = useState(true);
   const [userList, setUserList] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -93,13 +93,22 @@ const UserList = ({ handleMessaging }) => {
                     ? "ONLINE"
                     : "OFFLINE"}
                 </p>
+                <div className={styles.userBtnBox}>
                 <button className={styles.userBtn}
                   onClick={() => {
                     handleMessaging(user.username);
                   }}
                 >
-                  SEND MESSAGE
+                  MESSAGE
                 </button>
+                <button className={styles.userBtn}
+                  onClick={() => {
+                    handleCheckingProfile(user.username);
+                  }}
+                >
+                  PROFILE
+                </button>
+                </div>
               </div>
             );
           })}
@@ -110,6 +119,7 @@ const UserList = ({ handleMessaging }) => {
 
 UserList.propTypes = {
   handleMessaging: PropTypes.func,
+  handleCheckingProfile: PropTypes.func
 };
 
 export default UserList;
