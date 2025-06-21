@@ -3,6 +3,7 @@ import { useState } from "react";
 import UserList from "./UserList.jsx";
 import MessagePanel from "./MessagePanel.jsx";
 import styles from "../styles/Home.module.css";
+import ProfilePage from "./ProfilePage.jsx";
 
 const Home = () => {
   const { isLoggedIn, user } = useOutletContext();
@@ -20,7 +21,7 @@ const Home = () => {
     <div className={styles.base}>
         <UserList handleMessaging={handleMessaging} />
       <div className={styles.mainContent}>
-        {isMessaging && <MessagePanel sender={user.username} receiver={isMessaging} />}
+        {isMessaging ? <MessagePanel sender={user.username} receiver={isMessaging}/> : <ProfilePage/>}
       </div>
     </div>
   );

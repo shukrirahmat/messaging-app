@@ -81,7 +81,8 @@ function App() {
         <div className={styles.headerButtons}></div>
         <Link to="/">ODIN TEXT</Link>
         <div className={styles.headerButtons}>
-          {isLoggedIn && <button onClick={handleLogOut}>LOG OUT</button>}
+            {isLoggedIn && <button >PROFILE</button>}
+            {isLoggedIn && <button onClick={handleLogOut}>LOG OUT</button>}        
         </div>
       </h1>
       {isLoading ? (
