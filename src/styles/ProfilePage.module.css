@@ -1,0 +1,48 @@
+.base {
+  height: calc(100vh - 75px);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--smoky);
+  overflow-y: scroll;
+}
+
+.base > p {
+    flex: 1;
+    font-family: "Rubik", sans-serif;
+    font-weight: 350;
+    padding: 20px;
+}
+
+.profileContainer {
+    margin: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: "Rubik", sans-serif;
+    font-weight: 300;
+    background-color: var(--almostwhite);
+    padding: 20px;
+}
+
+.username {
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--blackgreen);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--darkersmoky);
+}
+
+.emptyBio {
+    color: var(--gray);
+}
+
+.otherDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.otherDetails > b {
+    font-size: 13px;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "../styles/ProfilePage.module.css";
@@ -52,14 +52,15 @@ const ProfilePage = ({ currentUser, username}) => {
       ) : fetchError ? (
         <p>{fetchError}</p>
       ) : (
-        <div>
-            <p>{username}</p>
+        <div className={styles.profileContainer}>
+            <p className={styles.username}>{profile.username}</p>
+            {profile.bio ? <p className={styles.bio}>{profile.bio} </p > : <p className={styles.emptyBio}>This user has not shared their bio yet</p>}
+            {(profile.firstName || profile.lastName) && <div className={styles.otherDetails}><b>Full Name</b><p>{profile.firstName} {profile.lastName} </p></div>}
+            {profile.age && <div className={styles.otherDetails}><b>Age</b><p>{profile.age} </p></div>}
+            {profile.gender && <div className={styles.otherDetails}><b>Gender</b><p>{profile.gender} </p></div>}
+            {profile.from && <div className={styles.otherDetails}><b>Location</b><p>{profile.from} </p></div>}
+            
             {currentUser.username === profile.username && <button>EDIT PROFILE</button>}
-            {(profile.firstName || profile.lastName) && <p>Name: {profile.firstName} {profile.lastName} </p>}
-            {profile.age && <p>Age: {profile.age} </p>}
-            {profile.gender && <p>Gender: {profile.gender} </p>}
-            {profile.from && <p>From: {profile.from} </p>}
-            {profile.bio && <p>Bio: {profile.bio} </p>}
         </div>
       )}
     </div>

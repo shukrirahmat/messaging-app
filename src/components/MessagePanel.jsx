@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchURL from "../fetchURL.js";
 import PropTypes from "prop-types";
@@ -129,7 +129,7 @@ const MessagePanel = ({ sender, receiver }) => {
               }
 
               return (
-                <>
+                <Fragment key={msg.id}>
                   {(index == 0 ||
                     !isSameDay(
                       msg.dateSend,
@@ -146,7 +146,7 @@ const MessagePanel = ({ sender, receiver }) => {
                       {format(msg.dateSend, "p")}
                     </p>
                   </div>
-                </>
+                </Fragment>
               );
             })}
           </div>
