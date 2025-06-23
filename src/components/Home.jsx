@@ -29,9 +29,9 @@ const Home = () => {
         {isMessaging ? (
           <MessagePanel sender={user.username} receiver={isMessaging} />
         ) : isCheckingProfile ? (
-          <ProfilePage currentUser={user} username={isCheckingProfile} />
+          <ProfilePage currentUser={user} username={isCheckingProfile} handleCheckingProfile={handleCheckingProfile}/>
         ) : (
-          <ProfilePage currentUser={user} username={user.username} />
+          <ProfilePage currentUser={user} username={user.username} handleCheckingProfile={handleCheckingProfile}/>
         )}
       </div>
     </div>

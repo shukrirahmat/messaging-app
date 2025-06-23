@@ -46,3 +46,15 @@
 .otherDetails > b {
     font-size: 13px;
 }
+
+.editBtn {
+    align-self: center;
+    border: 1px solid var(--gray);
+    padding: 2px 5px;
+    font-family: "Rubik", sans-serif;
+    font-weight: lighter;
+}
+
+.editBtn:hover {
+    background-color: var(--smoky);
+}
