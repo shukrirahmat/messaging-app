@@ -13,6 +13,7 @@ const Home = () => {
     isCheckingProfile,
     handleMessaging,
     handleCheckingProfile,
+    profileRefresher
   } = useOutletContext();
 
   if (!isLoggedIn) {
@@ -29,9 +30,9 @@ const Home = () => {
         {isMessaging ? (
           <MessagePanel sender={user.username} receiver={isMessaging} />
         ) : isCheckingProfile ? (
-          <ProfilePage currentUser={user} username={isCheckingProfile} handleCheckingProfile={handleCheckingProfile}/>
+          <ProfilePage currentUser={user} username={isCheckingProfile} refresher={profileRefresher}/>
         ) : (
-          <ProfilePage currentUser={user} username={user.username} handleCheckingProfile={handleCheckingProfile}/>
+          <ProfilePage currentUser={user} username={user.username} refresher={profileRefresher}/>
         )}
       </div>
     </div>

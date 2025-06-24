@@ -48,7 +48,7 @@
 }
 
 .editBtn {
-    align-self: center;
+    align-self: flex-end;
     border: 1px solid var(--gray);
     padding: 2px 5px;
     font-family: "Rubik", sans-serif;
@@ -57,4 +57,63 @@
 
 .editBtn:hover {
     background-color: var(--smoky);
+}
+
+.editForm {
+    margin: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: "Rubik", sans-serif;
+    font-weight: 300;
+    background-color: var(--almostwhite);
+    padding: 20px;
+}
+
+.base textarea {
+    resize: none;
+    min-height: 150px;
+    padding: 10px;
+    font-family: "Rubik", sans-serif;
+}
+
+.base textarea:focus {
+    outline: solid 2px var(--darkersmoky);
+}
+
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+    align-self: flex-start;
+}
+
+.inputBox label{
+    font-size: 13px;
+    font-weight: 450;
+}
+
+.inputBox .textInput {
+    font-size: 14px;
+    font-family: "Rubik", sans-serif;
+    padding: 2px 5px;
+    width: 350px;
+    font-weight: 300;
+}
+
+.editForm .editMsg {
+    align-self: flex-end;
+}
+
+.editForm .buttonBox {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+
+.editForm .buttonBox button {
+    width: 80px;
 }

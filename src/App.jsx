@@ -12,6 +12,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [isMessaging, setIsMessaging] = useState(null);
   const [isCheckingProfile, setIsCheckingProfile] = useState(null);
+  const [profileRefresher, setProfileRefresher] = useState(0);
 
   const handleMessaging = (username) => {
     setIsMessaging(username);
@@ -21,6 +22,12 @@ function App() {
   const handleCheckingProfile = (username) => {
     setIsCheckingProfile(username);
     setIsMessaging(null);
+  };
+
+  const goToProfile = () => {
+    setIsMessaging(null);
+    setIsCheckingProfile(null);
+    setProfileRefresher(profileRefresher + 1);
   };
 
   const handleLogOut = () => {
@@ -55,11 +62,6 @@ function App() {
           navigate(0);
         });
     }
-  };
-
-  const goToProfile = () => {
-    setIsMessaging(null);
-    setIsCheckingProfile(null);
   };
 
   useEffect(() => {
@@ -113,6 +115,7 @@ function App() {
             isCheckingProfile,
             handleMessaging,
             handleCheckingProfile,
+            profileRefresher
           }}
         />
       )}

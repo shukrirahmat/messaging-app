@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styles from "../styles/ProfilePage.module.css";
 import fetchURL from "../fetchURL.js";
 
-const ProfilePage = ({ currentUser, username, handleCheckingProfile }) => {
+const ProfilePage = ({ currentUser, username, refresher }) => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [isLoadingProfile, setIsLoadingProfile] = useState(true);
@@ -73,7 +73,7 @@ const ProfilePage = ({ currentUser, username, handleCheckingProfile }) => {
       });
   };
 
-  useEffect(() => {  
+  useEffect(() => {
     setIsLoadingProfile(true);
     setFetchError(null);
     setUpdateError(null);
@@ -110,7 +110,7 @@ const ProfilePage = ({ currentUser, username, handleCheckingProfile }) => {
           setIsLoadingProfile(false);
         }
       });
-  }, [username]);
+  }, [username, refresher]);
 
   return (
     <div className={styles.base}>
@@ -124,7 +124,7 @@ const ProfilePage = ({ currentUser, username, handleCheckingProfile }) => {
           <textarea
             name="bio"
             placeholder={`Write your bio...`}
-            value={editInputs.bio? editInputs.bio : ""}
+            value={editInputs.bio ? editInputs.bio : ""}
             onChange={(e) => {
               handleInputChange({ ...editInputs, bio: e.target.value });
             }}
@@ -133,42 +133,49 @@ const ProfilePage = ({ currentUser, username, handleCheckingProfile }) => {
           <div className={styles.inputBox}>
             <label htmlFor="fullName">Full Name</label>
             <input
+              className={styles.textInput}
               type="text"
               id="fullName"
               name="fullName"
-              value={editInputs.fullName? editInputs.fullName : ""}
+              value={editInputs.fullName ? editInputs.fullName : ""}
               onChange={(e) => {
                 handleInputChange({ ...editInputs, fullName: e.target.value });
               }}
             />
           </div>
           <div className={styles.inputBox}>
-            <label htmlFor="gender">Gender</label>
-            <select name="gender" id="gender" defaultValue={editInputs.gender? editInputs.gender : ""} onChange={(e) => {
-                handleInputChange({ ...editInputs, gender: e.target.value });
-              }}>
-              <option value="Male" >Male</option>
-              <option value="Female" >Female</option>
-              <option value="">Do Not Show</option>
-            </select>
-          </div>
-          <div className={styles.inputBox}>
             <label htmlFor="location">Location</label>
             <input
+              className={styles.textInput}
               type="text"
               id="location"
               name="location"
-              value={editInputs.location? editInputs.location : ""}
+              value={editInputs.location ? editInputs.location : ""}
               onChange={(e) => {
                 handleInputChange({ ...editInputs, location: e.target.value });
               }}
             />
           </div>
+                    <div className={styles.inputBox}>
+            <label htmlFor="gender">Gender</label>
+            <select
+              name="gender"
+              id="gender"
+              defaultValue={editInputs.gender ? editInputs.gender : ""}
+              onChange={(e) => {
+                handleInputChange({ ...editInputs, gender: e.target.value });
+              }}
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="">Do Not Show</option>
+            </select>
+          </div>
 
-          {isUpdating && <p>Saving profile...</p>}
-          {updateError && <p>{updateError}</p>}
+          {isUpdating && <p className={styles.editMsg}>Saving profile...</p>}
+          {updateError && <p className={styles.editMsg}>{updateError}</p>}
           {currentUser.username === profile.username && !isUpdating && (
-            <div>
+            <div className={styles.buttonBox}>
               <button className={styles.editBtn} type="submit">
                 SAVE
               </button>
@@ -196,16 +203,16 @@ const ProfilePage = ({ currentUser, username, handleCheckingProfile }) => {
               <p>{profile.fullName} </p>
             </div>
           )}
-          {profile.gender && (
-            <div className={styles.otherDetails}>
-              <b>Gender</b>
-              <p>{profile.gender} </p>
-            </div>
-          )}
           {profile.location && (
             <div className={styles.otherDetails}>
               <b>Location</b>
               <p>{profile.location} </p>
+            </div>
+          )}
+          {profile.gender && (
+            <div className={styles.otherDetails}>
+              <b>Gender</b>
+              <p>{profile.gender} </p>
             </div>
           )}
 
@@ -223,7 +230,7 @@ const ProfilePage = ({ currentUser, username, handleCheckingProfile }) => {
 ProfilePage.propTypes = {
   currentUser: PropTypes.object,
   username: PropTypes.string,
-  handleCheckingProfile: PropTypes.func
+  refresher: PropTypes.number,
 };
 
 export default ProfilePage;
