@@ -32,6 +32,10 @@
   border-bottom: 1px solid var(--darkersmoky);
 }
 
+.bio {
+    white-space: pre-wrap;
+}
+
 .emptyBio {
   color: var(--gray);
 }
@@ -70,14 +74,16 @@
   padding: 20px;
 }
 
-.base textarea {
+.base .textArea {
   resize: none;
   min-height: 150px;
   padding: 10px;
   font-family: "Rubik", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
 }
 
-.base textarea:focus {
+.base .textArea:focus {
   outline: solid 2px var(--darkersmoky);
 }
 

@@ -122,6 +122,7 @@ const ProfilePage = ({ currentUser, username, refresher }) => {
         <form className={styles.editForm} onSubmit={saveEdit}>
           <p className={styles.username}>{profile.username}</p>
           <textarea
+            className={styles.textArea}
             name="bio"
             placeholder={`Write your bio...`}
             value={editInputs.bio ? editInputs.bio : ""}
