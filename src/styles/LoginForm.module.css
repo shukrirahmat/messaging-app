@@ -72,3 +72,9 @@
 .signUpText a {
     color: var(--darkergreen);
 }
+
+@media (max-width: 600px) {
+  .form {
+    width: 80%;
+  }
+}

@@ -18,6 +18,7 @@
   height: 50px;
   align-items: center;
   padding: 0px 20px;
+  white-space: nowrap;
 }
 
 .headerButtons {
@@ -29,6 +30,10 @@
   gap: 20px;
 }
 
+.headerButtonsLeft {
+  width: 25%;
+}
+
 .headerButtons button {
   border: 1px solid var(--blackgreen);
   padding: 5px 10px;
@@ -36,6 +41,7 @@
   font-family: "Rubik", sans-serif;
   background-color: var(--smoky);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .headerButtons button:hover {
@@ -68,4 +74,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 600px) {
+  .headerButtonsLeft {
+    display: none;
+  }
+
+  .headerButtons {
+    gap: 10px;
+  }
 }

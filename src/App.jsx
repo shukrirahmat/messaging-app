@@ -30,6 +30,10 @@ function App() {
     setProfileRefresher(profileRefresher + 1);
   };
 
+  const goToLogIn = () => {
+    navigate("/log-in");
+  }
+
   const handleLogOut = () => {
     const token = window.localStorage.getItem("token");
 
@@ -97,9 +101,10 @@ function App() {
   return (
     <div className={styles.base}>
       <h1 className={styles.header}>
-        <div className={styles.headerButtons}></div>
+        <div className={styles.headerButtonsLeft}></div>
         <Link to="/">ODIN TEXT</Link>
         <div className={styles.headerButtons}>
+          {!isLoggedIn && <button onClick={goToLogIn}>LOG IN</button>}
           {isLoggedIn && <button onClick={goToProfile}>PROFILE</button>}
           {isLoggedIn && <button onClick={handleLogOut}>LOG OUT</button>}
         </div>

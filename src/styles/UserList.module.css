@@ -1,81 +1,96 @@
 .base {
-    width: 20%;
-    height: calc(100vh - 75px);
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    border-right: 1px solid var(--darkersmoky);   
-    background-color: var(--almostwhite);
-    padding: 0px 15px;
+  width: 20%;
+  height: calc(100vh - 75px);
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  border-right: 1px solid var(--darkersmoky);
+  background-color: var(--almostwhite);
+  padding: 0px 15px;
 }
 
 .message {
-    font-family: "Rubik", sans-serif;
-    font-weight: normal;
-    font-size: 16px;
-    margin: auto;
-    color: var(--blackgreen);
-
+  font-family: "Rubik", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  margin: auto;
+  color: var(--blackgreen);
 }
 
 .base > h2 {
-    font-family: "Rubik", sans-serif;
-    font-weight: normal;
-    font-size: 16px;
-    color: var(--blackgreen);
-    border-bottom: 1px solid var(--darkersmoky); 
-    padding: 10px 0;
+  font-family: "Rubik", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  color: var(--blackgreen);
+  border-bottom: 1px solid var(--darkersmoky);
+  padding: 10px 0;
 }
 
 .list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .user {
-    font-family: "Rubik", sans-serif;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 5px 10px;
-    border-left: 1px solid var(--darkersmoky);
+  font-family: "Rubik", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px 10px;
+  border-left: 1px solid var(--darkersmoky);
 }
 
 .userName {
-    color: var(--blackgreen);
-    font-weight: 500;
+  color: var(--blackgreen);
+  font-weight: 500;
+  overflow-x: hidden;
 }
 
 .userOnline {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: var(--warmgreen)
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--warmgreen);
 }
 
 .userOffline {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: var(--gray)
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--gray);
 }
 
 .userBtnBox {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .userBtn {
-    align-self: flex-start;
-    border: 1px solid var(--gray);
-    padding: 2px 5px;
-    font-family: "Rubik", sans-serif;
-    font-weight: lighter;
+  align-self: flex-start;
+  border: 1px solid var(--gray);
+  padding: 2px 5px;
+  font-family: "Rubik", sans-serif;
+  font-weight: lighter;
 }
 
 .userBtn:hover {
-    background-color: var(--smoky);
+  background-color: var(--smoky);
+}
+
+@media (max-width: 1000px) {
+  .base {
+    width: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .base {
+    align-self: center;
+    width: 60%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
 }

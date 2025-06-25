@@ -79,3 +79,9 @@
     bottom: 10px;
     align-self: center;
 }
+
+@media (max-width: 600px) {
+  .form {
+    width: 80%;
+  }
+}
