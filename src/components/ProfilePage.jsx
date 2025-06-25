@@ -46,10 +46,10 @@ const ProfilePage = ({ currentUser, username, refresher }) => {
       },
       body: new URLSearchParams({
         username: editInputs.username,
-        fullName: editInputs.fullName,
-        bio: editInputs.bio,
-        gender: editInputs.gender,
-        location: editInputs.location,
+        fullName: editInputs.fullName? editInputs.fullName : "",
+        bio: editInputs.bio? editInputs.bio : "",
+        gender: editInputs.gender? editInputs.gender : "",
+        location: editInputs.location? editInputs.location : "",
       }),
     })
       .then((response) => {
