@@ -1,3 +1,3 @@
-const url = "https://rural-myrah-shkrrhmt-58679d76.koyeb.app";
+const url = import.meta.env.VITE_FETCH_URL;
 
 export default url;
