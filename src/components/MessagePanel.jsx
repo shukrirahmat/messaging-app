@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchURL from "../fetchURL.js";
 import PropTypes from "prop-types";
@@ -7,13 +7,19 @@ import styles from "../styles/MessagePanel.module.css";
 
 const MessagePanel = ({ sender, receiver }) => {
   const navigate = useNavigate();
+  const messagesEndRef = useRef(null);
   const [message, setMessage] = useState("");
   const [sendError, setSendError] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [isLoadingMessage, setIsLoadingMessage] = useState(true);
   const [LoadingMessageErr, setLoadingMessageErr] = useState(false);
   const [messageList, setMessageList] = useState([]);
-  const [refresh, setRefresh] = useState(0);
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const editMessage = (e) => {
     const newMessage = e.target.value;
@@ -55,7 +61,9 @@ const MessagePanel = ({ sender, receiver }) => {
           setMessage("");
           setSendError("");
           setIsSending(false);
-          setRefresh(refresh + 1);
+          const newList = messageList.slice();
+          newList.push(data);
+          setMessageList(newList);
         })
         .catch((err) => {
           if (err.message === "Unverified") {
@@ -67,6 +75,10 @@ const MessagePanel = ({ sender, receiver }) => {
         });
     }
   };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messageList]);
 
   useEffect(() => {
     setIsLoadingMessage(true);
@@ -106,7 +118,7 @@ const MessagePanel = ({ sender, receiver }) => {
           }
         });
     }
-  }, [receiver, refresh]);
+  }, [receiver]);
 
   return (
     <div className={styles.base}>
@@ -151,6 +163,7 @@ const MessagePanel = ({ sender, receiver }) => {
             })}
           </div>
         )}
+        <div ref={messagesEndRef} />
       </div>
       <form onSubmit={sendMessage}>
         <textarea

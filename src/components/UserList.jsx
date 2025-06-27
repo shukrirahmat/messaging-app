@@ -96,10 +96,11 @@ const UserList = ({ handleMessaging, handleCheckingProfile }) => {
                 <div className={styles.userBtnBox}>
                 <button className={styles.userBtn}
                   onClick={() => {
+                    user.outbox = [];
                     handleMessaging(user.username);
                   }}
                 >
-                  MESSAGE
+                  MESSAGE {user.outbox.length > 0 && <p className={styles.msgNoti}>{user.outbox.length}</p>}
                 </button>
                 <button className={styles.userBtn}
                   onClick={() => {

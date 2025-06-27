@@ -71,18 +71,34 @@
 .userBtn {
   align-self: flex-start;
   border: 1px solid var(--gray);
-  padding: 2px 5px;
+  padding: 2px 10px;
   font-family: "Rubik", sans-serif;
   font-weight: lighter;
+  position: relative;
 }
 
 .userBtn:hover {
   background-color: var(--smoky);
 }
 
-@media (max-width: 1000px) {
+.msgNoti {
+  color: white;
+  background-color: crimson;
+  position: absolute;
+  padding: 2px 5px;
+  min-width: 18px;
+  font-weight: 400;
+  border-radius: 50%;
+  top: -50%;
+  right: -10%;
+  z-index: 3;
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
   .base {
-    width: 200px;
+    width: 225px;
   }
 }
 
